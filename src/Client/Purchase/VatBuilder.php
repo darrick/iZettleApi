@@ -13,7 +13,7 @@ final class VatBuilder implements VatBuilderInterface
     {
         $data = [];
         foreach ($vatAmounts as $vat => $amount) {
-            $data[$vat] = new Money($amount, $currency);
+            $data[(string) $amount['taxValue']] = new Money($amount['taxAmount'], $currency);
         }
 
         return $data;

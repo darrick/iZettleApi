@@ -29,6 +29,12 @@ final class ProductBuilder implements ProductBuilderInterface
 
     private function build(array $product, Currency $currency): Product
     {
+        if ($this->getFromKey('vatPercentage', $product) == null && !empty($this->getFromKey('taxRates', $product))) {
+            $tax_rates = $this->getFromKey('taxRates', $product);
+            $product['vatPercentage'] = $tax_rates[0]['percentage'];
+        }   else {
+            $product['vatPercentage'] = 0.0;
+        }
         return new Product(
             $this->getUuidFromKey('productUuid', $product),
             $this->getUuidFromKey('variantUuid', $product),

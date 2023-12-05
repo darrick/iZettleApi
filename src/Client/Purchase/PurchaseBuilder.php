@@ -57,6 +57,14 @@ final class PurchaseBuilder implements PurchaseBuilderInterface
     {
         $currency = new Currency($data['currency']);
 
+        if (!array_key_exists('vatAmount', $data)) {
+          $data['vatAmount'] = array_key_exists('taxAmount', $data) ? $data['taxAmount'] : 0;
+        }
+
+        if (!array_key_exists('groupedVatAmounts', $data)) {
+            $data['groupedVatAmounts'] = array_key_exists('taxValues', $data) ? $data['taxValues'] : array();
+          }
+
         return new Purchase(
             $data['purchaseUUID'],
             Uuid::fromString($data['purchaseUUID1']),
