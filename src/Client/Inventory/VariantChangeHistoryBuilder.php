@@ -8,7 +8,7 @@ use LauLamanApps\IzettleApi\API\Inventory\History;
 
 final class VariantChangeHistoryBuilder implements VariantChangeHistoryBuilderInterface
 {
-    public function buildFromJson(string $json): History
+    public function buildFromJson(string $json): array
     {
         // TODO: Implement buildFromJson() method.
     }

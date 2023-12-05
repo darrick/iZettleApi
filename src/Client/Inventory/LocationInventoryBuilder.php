@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LauLamanApps\IzettleApi\Client\Inventory;
 
 use LauLamanApps\IzettleApi\API\Inventory\LocationInventory;
+use Ramsey\Uuid\Uuid;
 
 final class LocationInventoryBuilder implements LocationInventoryBuilderInterface
 {
@@ -13,9 +14,9 @@ final class LocationInventoryBuilder implements LocationInventoryBuilderInterfac
      */
     private $locationBalanceBuilder;
 
-    public function __construct(LocationBalanceBuilderInterface $locationBalanceBuilder)
+    public function __construct(?LocationBalanceBuilderInterface $locationBalanceBuilder = null)
     {
-        $this->locationBalanceBuilder = $locationBalanceBuilder;
+        $this->locationBalanceBuilder = $locationBalanceBuilder ?? new LocationBalanceBuilder();
     }
 
     /**
@@ -42,10 +43,12 @@ final class LocationInventoryBuilder implements LocationInventoryBuilderInterfac
     private function build($data): LocationInventory
     {
         $locationBalances = [];
+        /*
         foreach ($data['variants'] as $locationBalanceData) {
             $categories[] = $this->locationBalanceBuilder->buildFromArray($locationBalanceData);
         }
+        */
 
-        return new LocationInventory($data['uuid'],  $data['trackedProducts'], ...$locationBalances);
+        return new LocationInventory(Uuid::fromString($data['inventoryUuid']));
     }
 }

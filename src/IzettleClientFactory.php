@@ -86,12 +86,7 @@ final class IzettleClientFactory
     {
         return new InventoryClient(
             $client,
-            $organizationUuid,
-            new LocationInventoryBuilder(
-                new LocationBalanceBuilder()
-            ),
-            new ProductBalanceBuilder(),
-            new InventoryHistoryBuilder(),
+            $organizationUuid
         );
     }
 }

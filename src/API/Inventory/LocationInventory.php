@@ -24,7 +24,7 @@ final class LocationInventory
      */
     private $locationBalances;
 
-    public function __construct(UuidInterface $uuid, array $trackedProducts, LocationBalance ...$locationBalances)
+    public function __construct(UuidInterface $uuid, ?array $trackedProducts = null, ?LocationBalance $locationBalances = null)
     {
         $this->uuid = $uuid;
         $this->trackedProducts = $trackedProducts;
